@@ -1,0 +1,96 @@
+%YAML 1.2
+---
+name: Tailwind CSS
+scope: source.css.tailwind
+version: 2
+
+extends: Packages/CSS/CSS.sublime-syntax
+
+file_extensions:
+  - tailwind.css
+
+contexts:
+
+###[ CSS OVERRIDES ]###########################################################
+
+  at-other:
+    - meta_prepend: true
+    - include: tailwind-at-layer
+    - include: tailwind-at-responsive
+    - include: tailwind-at-tailwind
+    - include: tailwind-at-variants
+
+  rule-list-body:
+    - meta_prepend: true
+    - include: tailwind-at-apply
+
+###[ TAILWIND INLINE AT RULES ]################################################
+
+  tailwind-at-apply:
+    - match: (@)apply{{break}}
+      captures:
+        0: keyword.control.directive.apply.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-apply-content
+
+  tailwind-at-apply-content:
+    - meta_scope: meta.at-rule.apply.css.tailwind
+    - include: at-rule-end
+    - include: common-operators
+    - match: '{{ident}}'
+      scope: constant.other.css.tailwind
+
+###[ TAILWIND TOPLEVEL AT RULES ]##############################################
+
+  tailwind-at-layer:
+    - match: (@)layer{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-layer-content
+
+  tailwind-at-layer-content:
+    - meta_scope: meta.at-rule.layer.css.tailwind
+    - include: at-rule-block
+    - include: at-rule-end
+    - match: (?:base|components|utilities){{break}}
+      scope: entity.other.layer-name.css.tailwind
+
+  tailwind-at-responsive:
+    - match: (@)responsive{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-responsive-content
+
+  tailwind-at-responsive-content:
+    - meta_scope: meta.at-rule.responsive.css.tailwind
+    - include: at-rule-block
+    - include: at-rule-end
+
+  tailwind-at-tailwind:
+    - match: (@)tailwind{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-tailwind-content
+
+  tailwind-at-tailwind-content:
+    - meta_scope: meta.at-rule.tailwind.css.tailwind
+    - include: at-rule-end
+    - match: '{{ident}}'
+      scope: entity.other.import.css.tailwind
+
+  tailwind-at-variants:
+    - match: (@)variants{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-variants-content
+
+  tailwind-at-variants-content:
+    - meta_scope: meta.at-rule.variants.css.tailwind
+    - include: at-rule-block
+    - include: at-rule-end
+    - match: '{{ident}}'
+      scope: entity.other.variant-name.css.tailwind
