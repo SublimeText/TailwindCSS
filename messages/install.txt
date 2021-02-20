@@ -1,0 +1,24 @@
+The CSS syntax extension with support for Tailwind CSS.
+
+- @tailwind
+- @apply
+- @layer
+- @responsive
+- @screen
+- @variants
+
+Usage
+-----
+
+This syntax is assigned to files which end with `tailwind.css` by default.
+
+You need to assign it to ordinary `*.css` files manually.
+
+1. Click onto the syntax name in the status bar
+2. Navigate to the sub menu `Open all with current extension as...`
+3. Click on `Tailwind CSS`.
+
+Feedback
+--------
+
+👉 Issues and suggestions may be filed at https://github.com/SublimeText/TailwindCSS/issues
