@@ -31,4 +31,5 @@ You need to assign it to ordinary `*.css` files manually.
 3. Click on `Tailwind CSS`.
 
 ## Related Extensions
+
 - [LSP-tailwindcss](https://github.com/sublimelsp/LSP-tailwindcss)
