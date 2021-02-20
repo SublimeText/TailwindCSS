@@ -73,6 +73,20 @@
 /*  ^ punctuation.section.block.end.css */
 }
 
+@screen base {
+/* <- meta.at-rule.screen.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^ meta.at-rule.screen.css.tailwind - meta.block */
+/*           ^^ meta.at-rule.screen.css.tailwind meta.block.css */
+/*^^^^^ keyword.control.directive.css.tailwind */
+/*      ^^^^ entity.other.screen-name.css.tailwind */
+/*           ^ punctuation.section.block.begin.css */
+    .bg {
+        @apply font-bold py-2 px-4 rounded !important;
+/*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+    }
+/*  ^ punctuation.section.block.end.css */
+}
+
 @variants variant {
 /* <- meta.at-rule.variants.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^^^^^^^ meta.at-rule.variants.css.tailwind - meta.block */
