@@ -9,7 +9,6 @@
     "bugs": {
         "url": "https://github.com/SublimeText/TailwindCSS/issues"
     },
-    "author": "Mauro Reis Vieira <mauroreisvieira@gmail.com>",
     "license": "MIT",
     "husky": {
         "hooks": {
