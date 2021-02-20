@@ -19,6 +19,7 @@ contexts:
     - include: tailwind-at-responsive
     - include: tailwind-at-tailwind
     - include: tailwind-at-variants
+    - include: tailwind-at-screen
 
   rule-list-body:
     - meta_prepend: true
@@ -94,3 +95,17 @@ contexts:
     - include: at-rule-end
     - match: '{{ident}}'
       scope: entity.other.variant-name.css.tailwind
+
+  tailwind-at-screen:
+    - match: (@)screen{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push: tailwind-at-screen-content
+
+  tailwind-at-screen-content:
+    - meta_scope: meta.at-rule.screen.css.tailwind
+    - include: at-rule-block
+    - include: at-rule-end
+    - match: (?:base|components|utilities){{break}}
+      scope: entity.other.screen-name.css.tailwind
