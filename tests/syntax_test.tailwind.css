@@ -39,7 +39,7 @@
 /*  ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind */
 /*                 ^ meta.property-list.css meta.block.css punctuation.terminator.rule.css */
 /*  ^^^^^^ keyword.control.directive.apply.css.tailwind */
-/*         ^^^^^^^^ constant.other.css.tailwind */
+/*         ^^^^^^^^ entity.other.attribute-name.class.css.tailwind */
     font-face: Helvetica;
 /*  ^^^^^^^^^ meta.property-name.css */
 }
@@ -83,8 +83,8 @@
     .bg {
         @apply font-bold py-2 px-4 rounded !important;
 /*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
-/*             ^^^^^^^^^ constant.other.css.tailwind */
-/*                       ^^^^ constant.other.css.tailwind */
+/*             ^^^^^^^^^ entity.other.attribute-name.class.css.tailwind */
+/*                       ^^^^ entity.other.attribute-name.class.css.tailwind */
 /*                                         ^^^^^^^^^^ keyword.other.important.css */
     }
 /*  ^ punctuation.section.block.end.css */

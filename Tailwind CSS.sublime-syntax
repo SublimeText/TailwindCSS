@@ -39,7 +39,7 @@ contexts:
     - include: at-rule-end
     - include: common-operators
     - match: '{{ident}}'
-      scope: constant.other.css.tailwind
+      scope: entity.other.attribute-name.class.css.tailwind
 
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
 
