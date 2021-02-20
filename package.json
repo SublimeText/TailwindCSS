@@ -1,0 +1,21 @@
+{
+    "name": "sublime-tailwindcss",
+    "version": "0.1.0",
+    "description": "This package adds syntax definitions for the TailwindCSS",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SublimeText/TailwindCSS"
+    },
+    "bugs": {
+        "url": "https://github.com/SublimeText/TailwindCSS/issues"
+    },
+    "license": "MIT",
+    "scripts": {
+        "changelog": "conventional-changelog -p angular -r 2 -i CHANGELOG.md -s",
+        "release": "bash scripts/release.sh",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+        "conventional-changelog-cli": "^2.1.1"
+    }
+}
