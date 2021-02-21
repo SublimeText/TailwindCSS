@@ -1,8 +1,8 @@
-![Tailwind CSS](./assets/screen.png)
+![Tailwind CSS](https://raw.githubusercontent.com/SublimeText/TailwindCSS/master/assets/screen.png)
 
 # Tailwind CSS
 
-A [Sublime Text](http://www.sublimetext.com) CSS syntax extension with support for [Tailwind CSS](https://tailwindcss.com/)
+A [Sublime Text](http://www.sublimetext.com) CSS syntax extension with support for [Tailwind CSS](https://tailwindcss.com)
 
 _Requires ST 4092 or higher._
 

@@ -4,4 +4,5 @@
 .gitignore      export-ignore
 
 # Development
+assets/         export-ignore
 tests/          export-ignore
