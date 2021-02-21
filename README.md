@@ -4,7 +4,7 @@
 
 A [Sublime Text](http://www.sublimetext.com) CSS syntax extension with support for [Tailwind CSS](https://tailwindcss.com/)
 
-_Requires ST 4094 or higher._
+_Requires ST 4092 or higher._
 
 ## Install
 
