@@ -24,6 +24,7 @@ contexts:
   rule-list-body:
     - meta_prepend: true
     - include: tailwind-at-apply
+    - include: postcss-nested-selectors
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 
@@ -109,3 +110,18 @@ contexts:
     - include: at-rule-end
     - match: '{{ident}}'
       scope: entity.other.variant-name.css.tailwind
+
+###[ POSTCSS NESTED SELECTORS ]################################################
+
+  postcss-nested-selectors:
+    - match: \&
+      scope: keyword.operator.selector.css
+      push:
+        - postcss-nested-property-list
+        - selector-content
+
+  postcss-nested-property-list:
+    - match: \{
+      scope: punctuation.section.block.begin.css
+      set: property-list-content
+    - include: else-pop
