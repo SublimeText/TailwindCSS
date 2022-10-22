@@ -15,6 +15,7 @@ contexts:
 
   at-other:
     - meta_prepend: true
+    - include: tailwind-at-config
     - include: tailwind-at-layer
     - include: tailwind-at-responsive
     - include: tailwind-at-tailwind
@@ -43,6 +44,20 @@ contexts:
       scope: entity.other.attribute-name.class.css.tailwind
 
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
+
+  # @config "./tailwind.config.js"
+  tailwind-at-config:
+    - match: (@)(?i:config){{break}}
+      captures:
+        0: keyword.control.directive.css
+        1: punctuation.definition.keyword.css
+      push: tailwind-at-config-content
+
+  tailwind-at-config-content:
+    - meta_scope: meta.at-rule.config.css.tailwind
+    - include: quoted-strings
+    - include: url-functions
+    - include: at-rule-end
 
   tailwind-at-layer:
     - match: (@)layer{{break}}

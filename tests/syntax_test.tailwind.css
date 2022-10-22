@@ -15,6 +15,12 @@
 
 /* Tailwind CSS */
 
+@config "./tailwind.config.js";
+/* <- meta.at-rule.config.css.tailwind keyword.control.directive.css punctuation.definition.keyword.css */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.config.css.tailwind */
+/*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css */
+
 @tailwind base;
 /* <- meta.at-rule.tailwind.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^^^ meta.at-rule.tailwind.css.tailwind */
