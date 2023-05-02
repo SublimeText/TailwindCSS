@@ -9,12 +9,31 @@ extends: Packages/CSS/CSS.sublime-syntax
 file_extensions:
   - tailwind.css
 
+variables:
+
+  property_or_selector_begin: (?={{selector_start}}|[-&]|{{nmstart}})
+  selector_start: '[[:alpha:].:#&*\[+>|~]'
+
 contexts:
 
-###[ CSS OVERRIDES ]###########################################################
+###[ CSS ]#####################################################################
+
+  main:
+    - include: stylesheet
+
+  stylesheet:
+    - include: comments
+    - include: properties-or-selectors
+    - include: property-lists
+    - include: at-rules
+    - include: rule-terminators
+    - include: illegal-groups
+
+###[ CSS AT RULES ]############################################################
 
   at-other:
     - meta_prepend: true
+    - include: tailwind-at-apply
     - include: tailwind-at-config
     - include: tailwind-at-layer
     - include: tailwind-at-responsive
@@ -22,10 +41,33 @@ contexts:
     - include: tailwind-at-variants
     - include: tailwind-at-screen
 
+###[ CSS PROPERTIES OR SELECTORS ]#############################################
+
+  properties-or-selectors:
+    - match: '{{property_or_selector_begin}}'
+      branch_point: property-or-selector
+      branch:
+        - maybe-property
+        - selector-content
+
+  maybe-property:
+    - include: property-identifiers
+    # a property's value is followed/terminated by one of ; ) }
+    - match: (?=[;)}])
+      pop: 1
+    # otherwise it is part of a selector
+    - match: ''
+      fail: property-or-selector
+
+  selector-variables:
+    - meta_append: true
+    - match: (\&){{nmchar}}*
+      scope: entity.other.attribute-name.css
+      captures:
+        1: variable.language.parent.less
+
   rule-list-body:
-    - meta_prepend: true
-    - include: tailwind-at-apply
-    - include: postcss-nested-selectors
+    - include: stylesheet
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 
@@ -125,18 +167,3 @@ contexts:
     - include: at-rule-end
     - match: '{{ident}}'
       scope: entity.other.variant-name.css.tailwind
-
-###[ POSTCSS NESTED SELECTORS ]################################################
-
-  postcss-nested-selectors:
-    - match: \&
-      scope: keyword.operator.selector.css
-      push:
-        - postcss-nested-property-list
-        - selector-content
-
-  postcss-nested-property-list:
-    - match: \{
-      scope: punctuation.section.block.begin.css
-      set: property-list-content
-    - include: else-pop
