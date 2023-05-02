@@ -31,7 +31,6 @@ contexts:
     - meta_prepend: true
     - include: tailwind-at-apply
     - include: tailwind-at-config
-    - include: tailwind-at-layer
     - include: tailwind-at-responsive
     - include: tailwind-at-tailwind
     - include: tailwind-at-variants
@@ -101,20 +100,6 @@ contexts:
     - include: quoted-strings
     - include: url-functions
     - include: at-rule-end
-
-  tailwind-at-layer:
-    - match: (@)layer{{break}}
-      captures:
-        0: keyword.control.directive.css.tailwind
-        1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-layer-content
-
-  tailwind-at-layer-content:
-    - meta_scope: meta.at-rule.layer.css.tailwind
-    - include: at-rule-block
-    - include: at-rule-end
-    - match: (?:base|components|utilities){{break}}
-      scope: entity.other.layer-name.css.tailwind
 
   tailwind-at-responsive:
     - match: (@)responsive{{break}}
