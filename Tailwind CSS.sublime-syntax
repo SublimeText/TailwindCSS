@@ -11,15 +11,11 @@ file_extensions:
 
 variables:
 
-  property_or_selector_begin: (?={{selector_start}}|[-&]|{{nmstart}})
-  selector_start: '[[:alpha:].:#&*\[+>|~]'
+  property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
 
 contexts:
 
 ###[ CSS ]#####################################################################
-
-  main:
-    - include: stylesheet
 
   stylesheet:
     - include: comments
@@ -48,7 +44,7 @@ contexts:
       branch_point: property-or-selector
       branch:
         - maybe-property
-        - selector-content
+        - selector-body
 
   maybe-property:
     - include: property-identifiers
@@ -61,12 +57,17 @@ contexts:
 
   selector-variables:
     - meta_append: true
-    - match: (\&){{nmchar}}*
-      scope: entity.other.attribute-name.css
-      captures:
-        1: variable.language.parent.less
+    - match: \&
+      scope: variable.language.parent.less
+      push: selector-parent-identifier-content
 
-  rule-list-body:
+  selector-parent-identifier-content:
+    - meta_scope: entity.other.attribute-name.css
+    - include: identifier-content
+
+  property-list-body:
+    - meta_scope: meta.property-list.css meta.block.css
+    - include: block-end
     - include: stylesheet
 
 ###[ TAILWIND INLINE AT RULES ]################################################
