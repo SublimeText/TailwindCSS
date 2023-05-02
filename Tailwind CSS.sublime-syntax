@@ -81,7 +81,8 @@ contexts:
   tailwind-at-apply-content:
     - meta_scope: meta.at-rule.apply.css.tailwind
     - include: at-rule-end
-    - include: common-operators
+    - include: arithmetic-operators
+    - include: important-operators
     - match: '{{ident}}'
       scope: entity.other.attribute-name.class.css.tailwind
 
