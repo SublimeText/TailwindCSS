@@ -75,6 +75,14 @@
     .bg {
         @apply font-bold py-2 px-4 rounded !important;
 /*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+
+        color: red;
+/*     ^^^^^^^^^^^^^ meta.at-rule.layer.css.tailwind meta.block.css meta.property-list.css meta.block.css */
+/*      ^^^^^ meta.property-name.css support.type.property-name.css */
+/*           ^ punctuation.separator.key-value.css */
+/*            ^^^^ meta.property-value.css */
+/*             ^^^ support.constant.color.w3c.standard.css */
+/*                ^ punctuation.terminator.rule.css */
     }
 /*  ^ punctuation.section.block.end.css */
 }
@@ -92,8 +100,16 @@
 
         {
 /*      ^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.begin.css */
-            @apply
+            @apply ;
 /*          ^^^^^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+
+            color: red;
+/*         ^^^^^^^^^^^^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css */
+/*          ^^^^^ meta.property-name.css support.type.property-name.css */
+/*               ^ punctuation.separator.key-value.css */
+/*                ^^^^ meta.property-value.css */
+/*                 ^^^ support.constant.color.w3c.standard.css */
+/*                    ^ punctuation.terminator.rule.css */
         }
 /*      ^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css */
 
@@ -103,6 +119,14 @@
 
             @apply font-bold py-2 px-4 rounded !important;
 /*          ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+
+            color: red;
+/*         ^^^^^^^^^^^^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css */
+/*          ^^^^^ meta.property-name.css support.type.property-name.css */
+/*               ^ punctuation.separator.key-value.css */
+/*                ^^^^ meta.property-value.css */
+/*                 ^^^ support.constant.color.w3c.standard.css */
+/*                    ^ punctuation.terminator.rule.css */
         }
 /*      ^ punctuation.section.block.end.css */
     }

@@ -69,6 +69,40 @@ contexts:
   rule-list-body:
     - include: stylesheet
 
+###[ CSS PROPERTY IDENTIFIERS ]################################################
+
+  builtin-property:
+    - match: '{{property_names}}'
+      scope: support.type.property-name.css
+      set: property-value
+
+  # Custom Properties
+  # https://drafts.csswg.org/css-variables/#typedef-custom-property
+  custom-property:
+    # custom property definition
+    - match: '{{custom_ident}}'
+      scope: entity.other.custom-property.css
+      set: property-value
+
+  deprecated-property:
+    - match: \b(var-)({{ident}})
+      scope: invalid.deprecated.custom-property.css
+      captures:
+        1: entity.other.custom-property.prefix.css
+        2: entity.other.custom-property.name.css
+      set: property-value
+
+  other-property:
+    # Note: Consume unknown identifiers to maintain word boundaries.
+    - match: '{{generic_ident}}'
+      set: property-value
+
+  property-value:
+    - match: ':'
+      scope: punctuation.separator.key-value.css
+      set: property-value-content
+    - include: else-pop
+
 ###[ TAILWIND INLINE AT RULES ]################################################
 
   tailwind-at-apply:
