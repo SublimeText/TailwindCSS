@@ -33,13 +33,53 @@ contexts:
 
   at-other:
     - meta_prepend: true
+    - include: at-layer
     - include: tailwind-at-apply
     - include: tailwind-at-config
-    - include: tailwind-at-layer
     - include: tailwind-at-responsive
     - include: tailwind-at-tailwind
     - include: tailwind-at-variants
     - include: tailwind-at-screen
+
+  # @layer
+  # https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
+  # 
+  # Notes:
+  # - This context exists for backward compatibility reasons with ST4092-4132
+  # - layer support was added by https://github.com/sublimehq/Packages/pulls/3366
+  at-layer:
+    - match: (@)(?i:layer){{break}}
+      captures:
+        0: keyword.control.directive.css
+        1: punctuation.definition.keyword.css
+      push: at-layer-content
+
+  at-layer-content:
+    - meta_scope: meta.at-rule.layer.css
+    - include: comma-delimiters
+    - include: at-layer-names
+    - include: at-rule-block
+    - include: at-rule-end
+    
+  at-layer-names:
+    - match: ({{ident}})(\.)
+      captures:
+        1: entity.other.layer.css
+        2: punctuation.accessor.dot.css
+      push: at-layer-qualified-name
+    - match: '{{ident}}'
+      scope: entity.other.layer.css
+
+  at-layer-qualified-name:
+    - meta_scope: meta.path.css
+    - match: ({{ident}})(\.)
+      captures:
+        1: entity.other.layer.css
+        2: punctuation.accessor.dot.css
+    - match: '{{ident}}'
+      scope: entity.other.layer.css
+      pop: 1
+    - include: immediately-pop
 
 ###[ CSS PROPERTIES OR SELECTORS ]#############################################
 
@@ -134,20 +174,6 @@ contexts:
     - include: quoted-strings
     - include: url-functions
     - include: at-rule-end
-
-  tailwind-at-layer:
-    - match: (@)layer{{break}}
-      captures:
-        0: keyword.control.directive.css.tailwind
-        1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-layer-content
-
-  tailwind-at-layer-content:
-    - meta_scope: meta.at-rule.layer.css.tailwind
-    - include: at-rule-block
-    - include: at-rule-end
-    - match: (?:base|components|utilities){{break}}
-      scope: entity.other.layer-name.css.tailwind
 
   tailwind-at-responsive:
     - match: (@)responsive{{break}}

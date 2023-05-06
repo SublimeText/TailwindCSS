@@ -66,18 +66,18 @@
 /* <- meta.at-rule.responsive.css.tailwind meta.block.css punctuation.section.block.end.css */
 
 @layer base {
-/* <- meta.at-rule.layer.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
-/*^^^^^^^^^^ meta.at-rule.layer.css.tailwind - meta.block */
-/*          ^^ meta.at-rule.layer.css.tailwind meta.block.css */
-/*^^^^ keyword.control.directive.css.tailwind */
-/*     ^^^^ entity.other.layer-name.css.tailwind */
+/* <- meta.at-rule.layer.css keyword.control.directive.css punctuation.definition.keyword.css */
+/*^^^^^^^^^^ meta.at-rule.layer.css - meta.block */
+/*          ^^ meta.at-rule.layer.css meta.block.css */
+/*^^^^ keyword.control.directive.css */
+/*     ^^^^ entity.other.layer.css */
 /*          ^ punctuation.section.block.begin.css */
     .bg {
         @apply font-bold py-2 px-4 rounded !important;
 /*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
 
         color: red;
-/*     ^^^^^^^^^^^^^ meta.at-rule.layer.css.tailwind meta.block.css meta.property-list.css meta.block.css */
+/*     ^^^^^^^^^^^^^ meta.at-rule.layer.css meta.block.css meta.property-list.css meta.block.css */
 /*      ^^^^^ meta.property-name.css support.type.property-name.css */
 /*           ^ punctuation.separator.key-value.css */
 /*            ^^^^ meta.property-value.css */
