@@ -1,0 +1,64 @@
+name: CI Syntax Tests
+
+on:
+  push:
+    push:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  pull_request:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+      - '**.tmPreferences'
+  workflow_dispatch:
+
+jobs:
+  syntax_tests:
+    name: Sublime Text ${{ matrix.build }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15   # default is 6 hours!
+    strategy:
+      matrix:
+        include:
+          - build: 4107
+            default_packages: v4107
+          - build: 4126
+            default_packages: v4126
+          - build: 4143
+            default_packages: v4143
+          - build: latest
+            default_packages: master
+    steps:
+      - name: Checkout Default Packages
+        uses: actions/checkout@v3
+        with:
+          repository: sublimehq/Packages
+          ref: ${{ matrix.default_packages }}
+          path: st_syntax_tests/Data/Packages
+
+      - name: Delete default package tests
+        run: |-
+          find st_syntax_tests/Data/Packages/*/ -type f -name 'syntax_test*' -exec rm -v '{}' \;
+
+      - name: Checkout Tailwind CSS
+        uses: actions/checkout@v3
+        with:
+          path: st_syntax_tests/Data/Packages/Tailwind CSS
+
+      - name: Run Syntax Tests for Sublime Text ${{ matrix.build }}
+        run: |-
+          if [[ "${{ matrix.build }}" == "latest" ]]; then
+            wget -O st_syntax_tests.tar.xz https://download.sublimetext.com/latest/dev/linux/x64/syntax_tests
+          else
+            wget -O st_syntax_tests.tar.xz https://download.sublimetext.com/st_syntax_tests_build_${{ matrix.build }}_x64.tar.xz
+          fi
+          tar xf st_syntax_tests.tar.xz
+          cd st_syntax_tests
+          ./syntax_tests
