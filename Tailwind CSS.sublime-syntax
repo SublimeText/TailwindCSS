@@ -11,19 +11,11 @@ file_extensions:
 
 variables:
 
-  property_or_selector_begin: (?={{selector_start}}|[-&]|{{ident_start}})
+  selector_start: '[[:alpha:]{{nested_selector_start}}]'
+  nested_selector_begin: (?={{nested_selector_start}})
+  nested_selector_start: '[.:#&*\[{{combinator_char}}]'
 
 contexts:
-
-###[ CSS ]#####################################################################
-
-  stylesheet:
-    - include: comments
-    - include: properties-or-selectors
-    - include: property-lists
-    - include: at-rules
-    - include: rule-terminators
-    - include: illegal-groups
 
 ###[ CSS AT RULES ]############################################################
 
@@ -36,38 +28,32 @@ contexts:
     - include: tailwind-at-variants
     - include: tailwind-at-screen
 
-###[ CSS PROPERTIES OR SELECTORS ]#############################################
+  at-rule-block-body:
+    - meta_scope: meta.block.css
+    - include: block-end2
+    - include: stylesheet
 
-  properties-or-selectors:
-    - match: '{{property_or_selector_begin}}'
-      branch_point: property-or-selector
-      branch:
-        - maybe-property
-        - selector-body
+###[ CSS SELECTORS ]###########################################################
 
-  maybe-property:
-    - include: property-identifiers
-    # a property's value is followed/terminated by one of ; ) }
-    - match: (?=[;)}])
-      pop: 1
-    # otherwise it is part of a selector
-    - match: ''
-      fail: property-or-selector
+  nested-selectors:
+    # https://drafts.csswg.org/css-nesting-1
+    - match: '{{nested_selector_begin}}'
+      push: selector-body
 
   selector-variables:
-    - meta_append: true
+    - meta_prepend: true
     - match: \&
-      scope: variable.language.parent.less
-      push: selector-parent-identifier-content
+      scope: variable.language.parent.css
 
-  selector-parent-identifier-content:
-    - meta_scope: entity.other.attribute-name.css
-    - include: identifier-content
+###[ CSS PROPERTY LISTS ]######################################################
 
   property-list-body:
     - meta_scope: meta.property-list.css meta.block.css
     - include: block-end
-    - include: stylesheet
+    - include: nested-selectors
+    - include: at-rules
+    - include: property-lists
+    - include: rule-list-body
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 

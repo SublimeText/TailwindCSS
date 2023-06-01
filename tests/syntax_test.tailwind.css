@@ -125,3 +125,55 @@
     }
 /*  ^ punctuation.section.block.end.css */
 }
+
+.test-nested-media { @media (width >= 1024px) { span { font-size: 1.25rem; } } }
+/*                 ^^ meta.property-list.css meta.block.css - meta.at-rule */
+/*                   ^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.media.css - meta.group - meta.block meta.block */
+/*                          ^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.media.css meta.group.css */
+/*                                           ^ meta.property-list.css meta.block.css meta.at-rule.media.css - meta.group - meta.block meta.block */
+/*                                            ^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.media.css meta.block.css - meta.block.css meta.block.css meta.block.css */
+/*                                                   ^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.media.css meta.block.css meta.property-list.css meta.block.css */
+/*                                                                          ^^ meta.property-list.css meta.block.css meta.at-rule.media.css meta.block.css - meta.block.css meta.block.css meta.block.css */
+/*                                                                            ^^ meta.property-list.css meta.block.css - meta.at-rule */
+
+.test-nested-selectors {
+    .bar { ... }
+/*  ^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^^^^ entity.other.attribute-name.class.css */
+/*  ^ punctuation.definition.entity.css */
+    #baz { ...}
+/*  ^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^^^^ entity.other.attribute-name.id.css */
+/*  ^ punctuation.definition.entity.css */
+    :has(p) { ... }
+/*  ^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^ punctuation.definition.pseudo-class.css */
+/*   ^^^ entity.other.pseudo-class.css */
+    ::backdrop { ... }
+/*  ^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^^ punctuation.definition.pseudo-element.css */
+/*    ^^^^^^^^ entity.other.pseudo-element.css */
+    [lang|="zh"] { ... }
+/*  ^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css meta.attribute-selector.css meta.brackets.css */
+/*              ^ meta.property-list.css meta.block.css meta.selector.css - meta.brackets.css*/
+    * { ... }
+/*  ^^ meta.property-list.css meta.block.css meta.selector.css */
+    + article { ... }
+/*  ^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^ keyword.operator.combinator.css */
+    > p { ... }
+/*  ^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^ keyword.operator.combinator.css */
+    ~ main { ... }
+/*  ^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^ keyword.operator.combinator.css */
+    || main { ... }
+/*  ^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^^ keyword.operator.combinator.css */
+    & article { ... }
+/*  ^^^^^^^^^^ meta.property-list.css meta.block.css meta.selector.css */
+/*  ^ variable.language.parent.css */
+/*    ^^^^^^^ entity.name.tag.html.css */
+    article { ... }
+/*  ^^^^^^^^ meta.property-list.css meta.block.css - meta.selector */
+}
