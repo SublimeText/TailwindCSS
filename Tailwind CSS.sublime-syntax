@@ -11,9 +11,13 @@ file_extensions:
 
 variables:
 
+  # Selectors
   selector_start: '[[:alpha:]{{nested_selector_start}}]'
   nested_selector_begin: (?={{nested_selector_start}})
   nested_selector_start: '[.:#&*\[{{combinator_char}}]'
+
+  # Combinators
+  combinator_char: '[+>|~]'
 
 contexts:
 
@@ -79,18 +83,20 @@ contexts:
   nested-selectors:
     # https://drafts.csswg.org/css-nesting-1
     - match: '{{nested_selector_begin}}'
-      push: selector-body
+      push: selector-content
 
-  selector-variables:
+  selector-content:
     - meta_prepend: true
     - match: \&
       scope: variable.language.parent.css
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
-  property-list-body:
+  property-list-content:
     - meta_scope: meta.property-list.css meta.block.css
-    - include: block-end
+    - match: \}
+      scope: punctuation.section.block.end.css
+      pop: 1
     - include: nested-selectors
     - include: at-rules
     - include: property-lists
@@ -141,8 +147,10 @@ contexts:
   tailwind-at-apply-content:
     - meta_scope: meta.at-rule.apply.css.tailwind
     - include: at-rule-end
-    - include: arithmetic-operators
-    - include: important-operators
+    - match: \!\s*(?i:important){{break}}
+      scope: keyword.other.important.css
+    - match: /
+      scope: keyword.operator.arithmetic.css
     - match: '{{ident}}'
       scope: entity.other.attribute-name.class.css.tailwind
 
