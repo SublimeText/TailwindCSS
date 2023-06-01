@@ -33,3 +33,15 @@ You need to assign it to ordinary `*.css` files manually.
 ## Related Extensions
 
 - [LSP-tailwindcss](https://github.com/sublimelsp/LSP-tailwindcss)
+
+## Troubleshooting
+
+Tailwind CSS extends Sublime Text's CSS syntax definitions.
+
+If Tailwind CSS syntax highlighting doesn't work and console displays syntax errors in _Tailwind CSS.sublime-syntax_, please make sure to remove any out-dated syntax override.
+
+Steps:
+
+1. call _Menu > Preferences > Browse Packages.._
+2. Look for _CSS_ folders
+3. Remove it or at least delete any syntax definition in it.

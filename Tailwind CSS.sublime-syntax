@@ -11,39 +11,17 @@ file_extensions:
 
 variables:
 
-  property_or_selector_begin: (?={{selector_start}}|[-&]|{{nmstart}})
-  selector_start: '[[:alpha:].:#&*\[+>|~]'
+  selector_start: '[[:alpha:]{{nested_selector_start}}]'
+  nested_selector_begin: (?={{nested_selector_start}})
+  nested_selector_start: '[.:#&*\[{{combinator_char}}]'
 
 contexts:
 
-###[ CSS ]#####################################################################
-
-  main:
-    - include: stylesheet
-
-  stylesheet:
-    - include: comments
-    - include: properties-or-selectors
-    - include: property-lists
-    - include: at-rules
-    - include: rule-terminators
-    - include: illegal-groups
-
 ###[ CSS AT RULES ]############################################################
-
-  at-other:
-    - meta_prepend: true
-    - include: at-layer
-    - include: tailwind-at-apply
-    - include: tailwind-at-config
-    - include: tailwind-at-responsive
-    - include: tailwind-at-tailwind
-    - include: tailwind-at-variants
-    - include: tailwind-at-screen
 
   # @layer
   # https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
-  # 
+  #
   # Notes:
   # - This context exists for backward compatibility reasons with ST4092-4132
   # - layer support was added by https://github.com/sublimehq/Packages/pulls/3366
@@ -60,7 +38,7 @@ contexts:
     - include: at-layer-names
     - include: at-rule-block
     - include: at-rule-end
-    
+
   at-layer-names:
     - match: ({{ident}})(\.)
       captures:
@@ -81,33 +59,42 @@ contexts:
       pop: 1
     - include: immediately-pop
 
-###[ CSS PROPERTIES OR SELECTORS ]#############################################
+  at-other:
+    - meta_prepend: true
+    - include: at-layer
+    - include: tailwind-at-apply
+    - include: tailwind-at-config
+    - include: tailwind-at-responsive
+    - include: tailwind-at-tailwind
+    - include: tailwind-at-variants
+    - include: tailwind-at-screen
 
-  properties-or-selectors:
-    - match: '{{property_or_selector_begin}}'
-      branch_point: property-or-selector
-      branch:
-        - maybe-property
-        - selector-content
+  at-rule-block-body:
+    - meta_scope: meta.block.css
+    - include: block-end2
+    - include: stylesheet
 
-  maybe-property:
-    - include: property-identifiers
-    # a property's value is followed/terminated by one of ; ) }
-    - match: (?=[;)}])
-      pop: 1
-    # otherwise it is part of a selector
-    - match: ''
-      fail: property-or-selector
+###[ CSS SELECTORS ]###########################################################
+
+  nested-selectors:
+    # https://drafts.csswg.org/css-nesting-1
+    - match: '{{nested_selector_begin}}'
+      push: selector-body
 
   selector-variables:
-    - meta_append: true
-    - match: (\&){{nmchar}}*
-      scope: entity.other.attribute-name.css
-      captures:
-        1: variable.language.parent.less
+    - meta_prepend: true
+    - match: \&
+      scope: variable.language.parent.css
 
-  rule-list-body:
-    - include: stylesheet
+###[ CSS PROPERTY LISTS ]######################################################
+
+  property-list-body:
+    - meta_scope: meta.property-list.css meta.block.css
+    - include: block-end
+    - include: nested-selectors
+    - include: at-rules
+    - include: property-lists
+    - include: rule-list-body
 
 ###[ CSS PROPERTY IDENTIFIERS ]################################################
 
@@ -154,7 +141,8 @@ contexts:
   tailwind-at-apply-content:
     - meta_scope: meta.at-rule.apply.css.tailwind
     - include: at-rule-end
-    - include: common-operators
+    - include: arithmetic-operators
+    - include: important-operators
     - match: '{{ident}}'
       scope: entity.other.attribute-name.class.css.tailwind
 
