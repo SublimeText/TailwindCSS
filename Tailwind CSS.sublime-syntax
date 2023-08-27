@@ -28,7 +28,14 @@ contexts:
     - include: tailwind-at-variants
     - include: tailwind-at-screen
 
+  at-rule-block:
+    # note: maintain compatibility with various ST4 builds
+    - match: \{
+      scope: punctuation.section.block.begin.css
+      push: at-rule-block-body
+
   at-rule-block-body:
+    # note: maintain compatibility with various ST4 builds
     - meta_scope: meta.block.css
     - include: block-end2
     - include: stylesheet
