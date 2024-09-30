@@ -11,11 +11,25 @@ file_extensions:
 
 variables:
 
-  selector_start: '[[:alpha:]{{nested_selector_start}}]'
-  nested_selector_begin: (?={{nested_selector_start}})
-  nested_selector_start: '[.:#&*\[{{combinator_char}}]'
+  # Properties and Selectors
+  property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
+  property_end: (?=[;@)}])
+
+  selector_start: '[[:alpha:].:#&*\[{{combinator_char}}]'
+  selector_end: (?=[;@(){}])
 
 contexts:
+
+  stylesheet:
+    # relaxed properties vs. selectors
+    - meta_include_prototype: false
+    - include: comments
+    - include: property-lists
+    - include: properties-or-selectors
+    - include: at-rules
+    - include: rule-terminators
+    - include: illegal-commas
+    - include: illegal-groups
 
 ###[ CSS AT RULES ]############################################################
 
@@ -29,25 +43,42 @@ contexts:
     - include: tailwind-at-screen
 
   at-rule-block:
-    # note: maintain compatibility with various ST4 builds
+    # required until ST4174 (PR #3831)
     - match: \{
       scope: punctuation.section.block.begin.css
       push: at-rule-block-body
 
   at-rule-block-body:
-    # note: maintain compatibility with various ST4 builds
+    # required until ST4174 (PR #3831)
     - meta_scope: meta.block.css
     - include: block-end2
     - include: stylesheet
 
 ###[ CSS SELECTORS ]###########################################################
 
-  nested-selectors:
-    # https://drafts.csswg.org/css-nesting-1
-    - match: '{{nested_selector_begin}}'
-      push: selector-body
+  properties-or-selectors:
+    # required until ST4174 (PR #3898)
+    - match: '{{property_or_selector_begin}}'
+      branch_point: property-or-selector
+      branch:
+        - maybe-property
+        - selector-body
+
+  maybe-property:
+    # required until ST4174 (PR #3898)
+    - meta_include_prototype: false
+    - include: property-end
+    - include: property-identifiers
+    - match: ''
+      fail: property-or-selector
+
+  property-end:
+    # required until ST4174 (PR #3898)
+    - match: '{{property_end}}'
+      pop: 1
 
   selector-variables:
+    # required until ST4174 (PR #3898)
     - meta_prepend: true
     - match: \&
       scope: variable.language.parent.css
@@ -55,12 +86,15 @@ contexts:
 ###[ CSS PROPERTY LISTS ]######################################################
 
   property-list-body:
+    # relaxed properties vs. selectors
     - meta_scope: meta.property-list.css meta.block.css
     - include: block-end
-    - include: nested-selectors
-    - include: at-rules
-    - include: property-lists
-    - include: rule-list-body
+    - include: stylesheet
+
+  illegal-commas:
+    # required until ST4174 (PR #3831)
+    - match: ','
+      scope: invalid.illegal.unexpected-token.css
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 

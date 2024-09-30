@@ -175,5 +175,6 @@
 /*  ^ variable.language.parent.css */
 /*    ^^^^^^^ entity.name.tag.html.css */
     article { ... }
-/*  ^^^^^^^^ meta.property-list.css meta.block.css - meta.selector */
+/*  ^^^^^^^ meta.property-list.css meta.block.css meta.selector.css entity.name.tag.html.css */
+/*         ^ meta.property-list.css meta.block.css meta.selector.css - entity */
 }
