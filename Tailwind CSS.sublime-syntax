@@ -11,6 +11,13 @@ file_extensions:
 
 variables:
 
+  # Block punctuations
+  #  Provides an easy and safe interface for template syntaxes to override
+  #  block punctuation patterns to prevent ambiguities with interpolations.
+  #  It helps to correctly highlight {{ tag }} { {{prop}}: {{value}} }
+  block_start: \{
+  block_end: \}
+
   # Properties and Selectors
   property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
   property_end: (?=[;@)}])
@@ -42,18 +49,6 @@ contexts:
     - include: tailwind-at-variants
     - include: tailwind-at-screen
 
-  at-rule-block:
-    # required until ST4174 (PR #3831)
-    - match: \{
-      scope: punctuation.section.block.begin.css
-      push: at-rule-block-body
-
-  at-rule-block-body:
-    # required until ST4174 (PR #3831)
-    - meta_scope: meta.block.css
-    - include: block-end2
-    - include: stylesheet
-
 ###[ CSS SELECTORS ]###########################################################
 
   properties-or-selectors:
@@ -83,6 +78,24 @@ contexts:
     - match: \&
       scope: variable.language.parent.css
 
+###[ CSS STYLESHEET BLOCKS ]####################################################
+
+  maybe-stylesheet-block:
+    # required until ST4174 (PR #3831)
+    - meta_include_prototype: false
+    - match: '{{block_start}}'
+      scope: punctuation.section.block.begin.css
+      set: stylesheet-block-body
+    - include: comments
+    - include: else-pop
+
+  stylesheet-block-body:
+    # required until ST4174 (PR #3831)
+    - meta_include_prototype: false
+    - meta_scope: meta.block.css
+    - include: block-end
+    - include: stylesheet
+
 ###[ CSS PROPERTY LISTS ]######################################################
 
   property-list-body:
@@ -107,11 +120,12 @@ contexts:
 
   tailwind-at-apply-content:
     - meta_scope: meta.at-rule.apply.css.tailwind
-    - include: at-rule-end
-    - include: arithmetic-operators
-    - include: important-operators
-    - match: '{{ident}}'
-      scope: entity.other.attribute-name.class.css.tailwind
+    - match: '{{custom_ident_begin}}'
+      push: custom-property-variable-content
+    - match: \.|{{ident_begin}}
+      scope: punctuation.definition.entity.css
+      push: selector-class-identifier-content
+    - include: values
 
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
 
@@ -134,50 +148,85 @@ contexts:
       captures:
         0: keyword.control.directive.css.tailwind
         1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-responsive-content
+      push:
+        - tailwind-at-responsive-meta
+        - maybe-stylesheet-block
 
-  tailwind-at-responsive-content:
+  tailwind-at-responsive-meta:
+    - meta_include_prototype: false
     - meta_scope: meta.at-rule.responsive.css.tailwind
-    - include: at-rule-block
-    - include: at-rule-end
+    - include: immediately-pop
 
   tailwind-at-screen:
     - match: (@)screen{{break}}
       captures:
         0: keyword.control.directive.css.tailwind
         1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-screen-content
+      push:
+        - tailwind-at-screen-meta
+        - maybe-stylesheet-block
+        - tailwind-at-screen-name
 
-  tailwind-at-screen-content:
+  tailwind-at-screen-meta:
+    - meta_include_prototype: false
     - meta_scope: meta.at-rule.screen.css.tailwind
-    - include: at-rule-block
-    - include: at-rule-end
+    - include: immediately-pop
+
+  tailwind-at-screen-name:
+    - meta_include_prototype: false
     - match: (?:base|components|utilities){{break}}
       scope: entity.other.screen-name.css.tailwind
+      pop: 1
+    - include: comments
+    - include: else-pop
 
   tailwind-at-tailwind:
     - match: (@)tailwind{{break}}
       captures:
         0: keyword.control.directive.css.tailwind
         1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-tailwind-content
+      push:
+        - tailwind-at-tailwind-meta
+        - tailwind-at-tailwind-name
 
-  tailwind-at-tailwind-content:
+  tailwind-at-tailwind-meta:
+    - meta_include_prototype: false
     - meta_scope: meta.at-rule.tailwind.css.tailwind
-    - include: at-rule-end
-    - match: '{{ident}}'
-      scope: entity.other.import.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-tailwind-name:
+    - meta_include_prototype: false
+    - match: '{{ident_begin}}'
+      set: tailwind-at-tailwind-name-content
+    - include: comments
+    - include: else-pop
+
+  tailwind-at-tailwind-name-content:
+    - meta_scope: entity.other.import.css.tailwind
+    - include: identifier-content
 
   tailwind-at-variants:
     - match: (@)variants{{break}}
       captures:
         0: keyword.control.directive.css.tailwind
         1: punctuation.definition.keyword.css.tailwind
-      push: tailwind-at-variants-content
+      push:
+        - tailwind-at-variants-meta
+        - maybe-stylesheet-block
+        - tailwind-at-variants-name
 
-  tailwind-at-variants-content:
+  tailwind-at-variants-meta:
+    - meta_include_prototype: false
     - meta_scope: meta.at-rule.variants.css.tailwind
-    - include: at-rule-block
-    - include: at-rule-end
-    - match: '{{ident}}'
-      scope: entity.other.variant-name.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-variants-name:
+    - meta_include_prototype: false
+    - match: '{{ident_begin}}'
+      set: tailwind-at-variant-content
+    - include: comments
+    - include: else-pop
+
+  tailwind-at-variant-content:
+    - meta_scope: entity.other.variant-name.css.tailwind
+    - include: identifier-content

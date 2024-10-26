@@ -45,7 +45,7 @@
 /*  ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind */
 /*                 ^ meta.property-list.css meta.block.css punctuation.terminator.rule.css */
 /*  ^^^^^^ keyword.control.directive.apply.css.tailwind */
-/*         ^^^^^^^^ entity.other.attribute-name.class.css.tailwind */
+/*         ^^^^^^^^ entity.other.attribute-name.class.css */
     font-family: Helvetica;
 /*  ^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-name.css support.type.property-name.css */
 }
@@ -117,11 +117,14 @@
 /*        ^^^^^^^ entity.other.variant-name.css.tailwind */
 /*                ^ punctuation.section.block.begin.css */
     .bg {
-        @apply font-bold py-2 px-4 rounded !important;
+        @apply font-bold py-2 px-4 .rounded --custom !important;
 /*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
-/*             ^^^^^^^^^ entity.other.attribute-name.class.css.tailwind */
-/*                       ^^^^ entity.other.attribute-name.class.css.tailwind */
-/*                                         ^^^^^^^^^^ keyword.other.important.css */
+/*             ^^^^^^^^^ entity.other.attribute-name.class.css */
+/*                       ^^^^ entity.other.attribute-name.class.css */
+/*                            ^^^^ entity.other.attribute-name.class.css */
+/*                                 ^^^^^^^^ entity.other.attribute-name.class.css */
+/*                                          ^^^^^^^^ variable.other.custom-property.css */
+/*                                                   ^^^^^^^^^^ keyword.other.important.css */
     }
 /*  ^ punctuation.section.block.end.css */
 }
