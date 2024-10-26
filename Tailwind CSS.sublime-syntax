@@ -9,34 +9,7 @@ extends: Packages/CSS/CSS.sublime-syntax
 file_extensions:
   - tailwind.css
 
-variables:
-
-  # Block punctuations
-  #  Provides an easy and safe interface for template syntaxes to override
-  #  block punctuation patterns to prevent ambiguities with interpolations.
-  #  It helps to correctly highlight {{ tag }} { {{prop}}: {{value}} }
-  block_start: \{
-  block_end: \}
-
-  # Properties and Selectors
-  property_or_selector_begin: (?={{ident_begin}}|{{selector_start}})
-  property_end: (?=[;@)}])
-
-  selector_start: '[[:alpha:].:#&*\[{{combinator_char}}]'
-  selector_end: (?=[;@(){}])
-
 contexts:
-
-  stylesheet:
-    # relaxed properties vs. selectors
-    - meta_include_prototype: false
-    - include: comments
-    - include: properties-or-selectors
-    - include: at-rules
-    - include: property-lists
-    - include: rule-terminators
-    - include: illegal-commas
-    - include: illegal-groups
 
 ###[ CSS AT RULES ]############################################################
 
@@ -48,66 +21,6 @@ contexts:
     - include: tailwind-at-tailwind
     - include: tailwind-at-variants
     - include: tailwind-at-screen
-
-###[ CSS SELECTORS ]###########################################################
-
-  properties-or-selectors:
-    # required until ST4174 (PR #3898)
-    - match: '{{property_or_selector_begin}}'
-      branch_point: property-or-selector
-      branch:
-        - maybe-property
-        - selector-body
-
-  maybe-property:
-    # required until ST4174 (PR #3898)
-    - meta_include_prototype: false
-    - include: property-end
-    - include: property-identifiers
-    - match: ''
-      fail: property-or-selector
-
-  property-end:
-    # required until ST4174 (PR #3898)
-    - match: '{{property_end}}'
-      pop: 1
-
-  selector-variables:
-    # required until ST4174 (PR #3898)
-    - meta_prepend: true
-    - match: \&
-      scope: variable.language.parent.css
-
-###[ CSS STYLESHEET BLOCKS ]####################################################
-
-  maybe-stylesheet-block:
-    # required until ST4174 (PR #3831)
-    - meta_include_prototype: false
-    - match: '{{block_start}}'
-      scope: punctuation.section.block.begin.css
-      set: stylesheet-block-body
-    - include: comments
-    - include: else-pop
-
-  stylesheet-block-body:
-    # required until ST4174 (PR #3831)
-    - meta_include_prototype: false
-    - meta_scope: meta.block.css
-    - include: block-end
-    - include: stylesheet
-
-###[ CSS PROPERTY LISTS ]######################################################
-
-  property-list-body:
-    # relaxed properties vs. selectors
-    - meta_scope: meta.property-list.css meta.block.css
-    - include: block-end
-    - include: stylesheet
-
-  illegal-commas:
-    # required until ST4174 (PR #3831)
-    - match: ','
-      scope: invalid.illegal.unexpected-token.css
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 
