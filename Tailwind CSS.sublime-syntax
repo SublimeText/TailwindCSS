@@ -31,9 +31,9 @@ contexts:
     # relaxed properties vs. selectors
     - meta_include_prototype: false
     - include: comments
-    - include: property-lists
     - include: properties-or-selectors
     - include: at-rules
+    - include: property-lists
     - include: rule-terminators
     - include: illegal-commas
     - include: illegal-groups
