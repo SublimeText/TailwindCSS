@@ -33,11 +33,15 @@ jobs:
             default_packages: v4126
           - build: 4143
             default_packages: v4143
-          - build: latest
-            default_packages: master
+          - build: 4152
+            default_packages: v4152
+          - build: 4169
+            default_packages: v4169
+          - build: 4173
+            default_packages: v4173
     steps:
       - name: Checkout Default Packages
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: sublimehq/Packages
           ref: ${{ matrix.default_packages }}
@@ -48,7 +52,7 @@ jobs:
           find st_syntax_tests/Data/Packages/*/ -type f -name 'syntax_test*' -exec rm -v '{}' \;
 
       - name: Checkout Tailwind CSS
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: st_syntax_tests/Data/Packages/Tailwind CSS
 
