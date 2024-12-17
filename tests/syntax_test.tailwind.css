@@ -21,6 +21,48 @@
 /*^^^^^ keyword.control.directive.css */
 /*      ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css */
 
+@plugin "daisyui";
+/*^^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind */
+/*^^^^^ keyword.control.directive.css.tailwind */
+/*      ^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*              ^ punctuation.definition.string.end.css */
+/*               ^ punctuation.terminator.rule.css */
+
+@plugin "daisyui/theme" {
+/*^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind */
+/*^^^^^ keyword.control.directive.css.tailwind */
+/*      ^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*                    ^ punctuation.definition.string.end.css */
+/*                      ^ meta.block.css punctuation.section.block.begin.css */
+  name: "light";
+/*^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind meta.block.css */
+/*^^^^ meta.property-name.css support.type.property-name.css */
+/*    ^ punctuation.separator.key-value.css */
+/*     ^^^^^^^^ meta.property-value.css */
+/*      ^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*            ^ punctuation.definition.string.end.css */
+/*             ^ punctuation.terminator.rule.css */
+  --color-primary: red;
+/*^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind meta.block.css */
+/*^^^^^^^^^^^^^^^ meta.property-name.css entity.other.custom-property.css */
+/*               ^ punctuation.separator.key-value.css */
+/*                ^^^^ meta.property-value.css */
+/*                 ^^^ support.constant.color.w3c.standard.css */
+/*                    ^ punctuation.terminator.rule.css */
+}
+/* <- meta.at-rule.plugin.css.tailwind meta.block.css punctuation.section.block.end.css */
+
+@source "./app/views/**/*.rb";
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.source.css.tailwind */
+/*^^^^^ keyword.control.directive.css.tailwind */
+/*      ^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*                          ^ punctuation.definition.string.end.css */
+/*                           ^ punctuation.terminator.rule.css */
+
 @tailwind base;
 /* <- meta.at-rule.tailwind.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^^^ meta.at-rule.tailwind.css.tailwind */
