@@ -162,7 +162,7 @@ contexts:
         1: punctuation.definition.keyword.css.tailwind
       push:
         - tailwind-at-plugin-meta
-        - maybe-stylesheet-block
+        - maybe-property-list
         - tailwind-at-plugin-path
 
   tailwind-at-plugin-meta:
@@ -267,7 +267,7 @@ contexts:
         1: punctuation.definition.keyword.css.tailwind
       push:
         - tailwind-at-theme-meta
-        - maybe-stylesheet-block
+        - maybe-property-list
 
   tailwind-at-theme-meta:
     - meta_include_prototype: false
@@ -281,7 +281,7 @@ contexts:
         1: punctuation.definition.keyword.css.tailwind
       push:
         - tailwind-at-utility-meta
-        - maybe-stylesheet-block
+        - maybe-property-list
         - tailwind-at-utility-name
 
   tailwind-at-utility-meta:
