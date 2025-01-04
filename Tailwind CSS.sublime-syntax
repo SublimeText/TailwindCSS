@@ -49,6 +49,7 @@ contexts:
     - include: tailwind-at-screen
     - include: tailwind-at-source
     - include: tailwind-at-tailwind
+    - include: tailwind-at-theme
     - include: tailwind-at-utility
     - include: tailwind-at-variants
 
@@ -250,6 +251,20 @@ contexts:
   tailwind-at-tailwind-name-content:
     - meta_scope: entity.other.import.css.tailwind
     - include: identifier-content
+
+  tailwind-at-theme:
+    - match: (@)theme{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push:
+        - tailwind-at-theme-meta
+        - maybe-stylesheet-block
+
+  tailwind-at-theme-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.theme.css.tailwind
+    - include: immediately-pop
 
   tailwind-at-utility:
     - match: (@)utility{{break}}
