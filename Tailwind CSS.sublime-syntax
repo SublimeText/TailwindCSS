@@ -15,6 +15,7 @@ contexts:
 
   at-other:
     - meta_prepend: true
+    - include: tailwind-at-utility
     - include: tailwind-at-apply
     - include: tailwind-at-config
     - include: tailwind-at-responsive
@@ -43,6 +44,32 @@ contexts:
     - include: values
 
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
+
+  tailwind-at-utility:
+    - match: (@)utility{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push:
+        - tailwind-at-utility-meta
+        - maybe-stylesheet-block
+        - tailwind-at-utility-name
+
+  tailwind-at-utility-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.utility.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-utility-name:
+    - meta_include_prototype: false
+    - match: '{{ident_begin}}'
+      set: tailwind-at-utility-name-content
+    - include: comments
+    - include: else-pop
+
+  tailwind-at-utility-name-content:
+    - meta_scope: entity.other.utility-name.css.tailwind
+    - include: identifier-content
 
   # @config "./tailwind.config.js"
   tailwind-at-config:
