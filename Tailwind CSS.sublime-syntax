@@ -44,13 +44,13 @@ contexts:
     - meta_prepend: true
     - include: tailwind-at-apply
     - include: tailwind-at-config
-    - include: tailwind-at-responsive
-    - include: tailwind-at-tailwind
-    - include: tailwind-at-variants
-    - include: tailwind-at-screen
     - include: tailwind-at-plugin
+    - include: tailwind-at-responsive
+    - include: tailwind-at-screen
     - include: tailwind-at-source
+    - include: tailwind-at-tailwind
     - include: tailwind-at-utility
+    - include: tailwind-at-variants
 
 ###[ CSS SELECTORS ]###########################################################
 
