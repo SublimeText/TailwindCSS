@@ -151,6 +151,21 @@
 /*  ^ punctuation.section.block.end.css */
 }
 
+@utility utility {
+/*^^^^^^^^^^^^^^^^ meta.at-rule.utility.css.tailwind */
+/*^^^^^^ keyword.control.directive.css.tailwind */
+/*       ^^^^^^^ entity.other.utility-name.css.tailwind */
+/*               ^ meta.block.css punctuation.section.block.begin.css */
+    @apply mb-4 font-extrabold;
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.utility.css.tailwind meta.block.css */
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.apply.css.tailwind */
+/*  ^^^^^^ keyword.control.directive.apply.css.tailwind */
+/*  ^ punctuation.definition.keyword.css.tailwind */
+/*         ^^^^^^^^^^^^^^^^^^^ entity.other.attribute-name.class.css */
+/*                            ^ punctuation.terminator.rule.css */
+}
+/* <- meta.at-rule.utility.css.tailwind meta.block.css punctuation.section.block.end.css */
+
 @variants variant {
 /* <- meta.at-rule.variants.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^^^^^^^ meta.at-rule.variants.css.tailwind - meta.block */
