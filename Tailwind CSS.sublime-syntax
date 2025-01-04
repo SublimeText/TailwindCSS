@@ -22,8 +22,16 @@ contexts:
     - include: tailwind-at-screen
     - include: tailwind-at-source
     - include: tailwind-at-tailwind
+    - include: tailwind-at-theme
     - include: tailwind-at-utility
     - include: tailwind-at-variants
+
+###[ CSS PROPERTY IDENTIFIERS ]################################################
+
+  custom-property-content:
+    - meta_prepend: true
+    - match: \*
+      scope: constant.other.wildcard.asterisk.css.tailwind
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 
@@ -44,32 +52,6 @@ contexts:
     - include: values
 
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
-
-  tailwind-at-utility:
-    - match: (@)utility{{break}}
-      captures:
-        0: keyword.control.directive.css.tailwind
-        1: punctuation.definition.keyword.css.tailwind
-      push:
-        - tailwind-at-utility-meta
-        - maybe-stylesheet-block
-        - tailwind-at-utility-name
-
-  tailwind-at-utility-meta:
-    - meta_include_prototype: false
-    - meta_scope: meta.at-rule.utility.css.tailwind
-    - include: immediately-pop
-
-  tailwind-at-utility-name:
-    - meta_include_prototype: false
-    - match: '{{ident_begin}}'
-      set: tailwind-at-utility-name-content
-    - include: comments
-    - include: else-pop
-
-  tailwind-at-utility-name-content:
-    - meta_scope: entity.other.utility-name.css.tailwind
-    - include: identifier-content
 
   # @config "./tailwind.config.js"
   tailwind-at-config:
@@ -92,7 +74,7 @@ contexts:
         1: punctuation.definition.keyword.css.tailwind
       push:
         - tailwind-at-plugin-meta
-        - maybe-stylesheet-block
+        - maybe-property-list
         - tailwind-at-plugin-path
 
   tailwind-at-plugin-meta:
@@ -188,6 +170,46 @@ contexts:
 
   tailwind-at-tailwind-name-content:
     - meta_scope: entity.other.import.css.tailwind
+    - include: identifier-content
+
+  tailwind-at-theme:
+    - match: (@)theme{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push:
+        - tailwind-at-theme-meta
+        - maybe-property-list
+
+  tailwind-at-theme-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.theme.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-utility:
+    - match: (@)utility{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push:
+        - tailwind-at-utility-meta
+        - maybe-property-list
+        - tailwind-at-utility-name
+
+  tailwind-at-utility-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.utility.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-utility-name:
+    - meta_include_prototype: false
+    - match: '{{ident_begin}}'
+      set: tailwind-at-utility-name-content
+    - include: comments
+    - include: else-pop
+
+  tailwind-at-utility-name-content:
+    - meta_scope: entity.other.utility-name.css.tailwind
     - include: identifier-content
 
   tailwind-at-variants:
