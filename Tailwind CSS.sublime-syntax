@@ -57,6 +57,7 @@ contexts:
 
   properties-or-selectors:
     # required until ST4174 (PR #3898)
+    - include: custom-properties
     - match: '{{property_or_selector_begin}}'
       branch_point: property-or-selector
       branch:
@@ -112,6 +113,13 @@ contexts:
     # required until ST4174 (PR #3831)
     - match: ','
       scope: invalid.illegal.unexpected-token.css
+
+###[ CSS PROPERTY IDENTIFIERS ]################################################
+
+  custom-property-content:
+    - meta_prepend: true
+    - match: \*
+      scope: constant.other.wildcard.asterisk.css.tailwind
 
 ###[ TAILWIND INLINE AT RULES ]################################################
 
