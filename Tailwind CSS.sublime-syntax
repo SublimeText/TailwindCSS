@@ -42,6 +42,7 @@ contexts:
 
   at-import-body:
     - meta_prepend: true
+    - include: quoted-urls
     - match: (?i:source)(?=\()
       scope: meta.function-call.identifier.css support.function.source.css.tailwind
       push:
@@ -159,7 +160,7 @@ contexts:
 
   tailwind-at-config-content:
     - meta_scope: meta.at-rule.config.css.tailwind
-    - include: quoted-strings
+    - include: quoted-urls
     - include: url-functions
     - include: at-rule-end
 
@@ -180,7 +181,7 @@ contexts:
 
   tailwind-at-plugin-path:
     - meta_include_prototype: false
-    - include: quoted-strings
+    - include: quoted-urls
     - include: url-functions
     - include: comments
     - include: else-pop
@@ -238,7 +239,7 @@ contexts:
 
   tailwind-at-source-path:
     - meta_include_prototype: false
-    - include: quoted-strings
+    - include: quoted-urls
     - include: url-functions
     - include: comments
     - include: else-pop

@@ -6,6 +6,7 @@
 /* <- meta.at-rule.import.css keyword.control.directive.css punctuation.definition.keyword.css */
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
 /*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
 
 @import "tailwindcss" source("../src");
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
