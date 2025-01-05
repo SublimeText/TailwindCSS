@@ -6,6 +6,23 @@
 /* <- meta.at-rule.import.css keyword.control.directive.css punctuation.definition.keyword.css */
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
 /*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+
+@import "tailwindcss" source("../src");
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
+/*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*                  ^ punctuation.definition.string.end.css */
+/*                    ^^^^^^ meta.function-call.identifier.css support.function.source.css.tailwind */
+/*                          ^^^^^^^^^^ meta.function-call.arguments.css meta.group.css */
+/*                          ^ punctuation.section.group.begin.css */
+/*                           ^ meta.string.css string.quoted.double.css punctuation.definition.string.begin.css */
+/*                            ^^^^^^ meta.path.url.css meta.string.css string.quoted.double.css */
+/*                              ^ punctuation.separator.path.css */
+/*                                  ^ meta.string.css string.quoted.double.css punctuation.definition.string.end.css */
+/*                                   ^ punctuation.section.group.end.css */
+/*                                    ^ punctuation.terminator.rule.css */
 
 @media (min-width: 640px) {
 /* <- meta.at-rule.media.css keyword.control.directive.css punctuation.definition.keyword.css */
