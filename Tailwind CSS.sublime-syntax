@@ -40,6 +40,14 @@ contexts:
 
 ###[ CSS AT RULES ]############################################################
 
+  at-import-body:
+    - meta_prepend: true
+    - match: (?i:source)(?=\()
+      scope: meta.function-call.identifier.css support.function.source.css.tailwind
+      push:
+        - url-function-arguments-list-body
+        - function-arguments-list-begin
+
   at-other:
     - meta_prepend: true
     - include: tailwind-at-apply
