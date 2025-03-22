@@ -48,6 +48,52 @@
 /*^^^^^ keyword.control.directive.css */
 /*      ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css */
 
+/* Tailwind 4.0 */
+@custom-variant pointer-coarse (@media (pointer: coarse));
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind */
+/*                             ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind */
+/*                              ^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind meta.at-rule.media.css */
+/*                                     ^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind meta.at-rule.media.css meta.group.css */
+/*                                                      ^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind - meta.at-rule.media */
+/*^^^^^^^^^^^^^ keyword.control.directive.css.tailwind */
+/*              ^^^^^^^^^^^^^^ entity.other.variant-name.css.tailwind */
+
+@custom-variant theme-midnight (&:where([data-theme="midnight"] *));
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind */
+/*                             ^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind */
+/*                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind meta.selector.css */
+/*                                                                ^ meta.at-rule.custom-variant.css.tailwind meta.group.css.tailwind */
+/*^^^^^^^^^^^^^ keyword.control.directive.css.tailwind */
+/*              ^^^^^^^^^^^^^^ entity.other.variant-name.css.tailwind */
+
+@custom-variant pointer-coarse {
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind */
+/*^^^^^^^^^^^^^ keyword.control.directive.css.tailwind */
+/*              ^^^^^^^^^^^^^^ entity.other.variant-name.css.tailwind */
+/*                             ^ meta.block.css punctuation.section.block.begin.css */
+  @media (pointer: coarse) {
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.block.css meta.at-rule.media.css */
+/*^^^^^^ keyword.control.directive.css */
+/*^ punctuation.definition.keyword.css */
+/*       ^^^^^^^^^^^^^^^^^ meta.group.css */
+/*       ^ punctuation.section.group.begin.css */
+/*        ^^^^^^^ support.type.property-name.css */
+/*               ^ punctuation.separator.key-value.css */
+/*                 ^^^^^^ support.constant.property-value.css */
+/*                       ^ punctuation.section.group.end.css */
+/*                         ^ meta.block.css punctuation.section.block.begin.css */
+    @slot;
+/*^^^^^^^^ meta.at-rule.custom-variant.css.tailwind meta.block.css meta.at-rule.media.css meta.block.css */
+/*  ^^^^^ meta.at-rule.slot.css.tailwind keyword.control.directive.css.tailwind */
+/*  ^ punctuation.definition.keyword.css.tailwind */
+/*       ^ punctuation.terminator.rule.css */
+  }
+/*^ meta.at-rule.custom-variant.css.tailwind meta.block.css meta.at-rule.media.css meta.block.css */
+/*^ punctuation.section.block.end.css */
+}
+/* <- meta.at-rule.custom-variant.css.tailwind meta.block.css punctuation.section.block.end.css */
+
+/* Tailwind 3.x */
 @layer base {
 /* <- meta.at-rule.layer.css keyword.control.directive.css punctuation.definition.keyword.css */
 /*^^^^^^^^^^ meta.at-rule.layer.css - meta.block */
