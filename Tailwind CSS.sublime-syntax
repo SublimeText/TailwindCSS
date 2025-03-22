@@ -298,7 +298,7 @@ contexts:
     - include: else-pop
 
   tailwind-at-source:
-    - match: (@)source{{break}}
+    - match: (@)(?:reference|source){{break}}
       captures:
         0: keyword.control.directive.css.tailwind
         1: punctuation.definition.keyword.css.tailwind

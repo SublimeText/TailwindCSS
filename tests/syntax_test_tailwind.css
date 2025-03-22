@@ -108,6 +108,7 @@
 /*  ^ punctuation.section.block.end.css */
 }
 
+/* Tailswind 4.x */
 @plugin "daisyui";
 /*^^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind */
 /*^^^^^ keyword.control.directive.css.tailwind */
@@ -116,6 +117,7 @@
 /*              ^ punctuation.definition.string.end.css */
 /*               ^ punctuation.terminator.rule.css */
 
+/* Tailswind 4.x */
 @plugin "daisyui/theme" {
 /*^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.plugin.css.tailwind */
 /*^^^^^ keyword.control.directive.css.tailwind */
@@ -142,6 +144,15 @@
 }
 /* <- meta.at-rule.plugin.css.tailwind meta.block.css punctuation.section.block.end.css */
 
+/* Tailswind 4.x */
+@reference "../../app.css"
+/*^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.source.css.tailwind */
+/*^^^^^^^^ keyword.control.directive.css.tailwind */
+/*         ^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*            ^ punctuation.separator.path.css */
+/*               ^ punctuation.separator.path.css */
+
+/* Tailswind 3.x */
 @responsive {
 /* <- meta.at-rule.responsive.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^ meta.at-rule.responsive.css.tailwind - meta.block */
@@ -157,6 +168,7 @@
 }
 /* <- meta.at-rule.responsive.css.tailwind meta.block.css punctuation.section.block.end.css */
 
+/* Tailswind 3.x */
 @screen base {
 /* <- meta.at-rule.screen.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
 /*^^^^^^^^^^^ meta.at-rule.screen.css.tailwind - meta.block */
@@ -187,6 +199,7 @@
 /*  ^ punctuation.section.block.end.css */
 }
 
+/* Tailswind 4.x */
 @source "./app/views/**/*.rb";
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.source.css.tailwind */
 /*^^^^^ keyword.control.directive.css.tailwind */
