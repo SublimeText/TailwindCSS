@@ -148,6 +148,32 @@ contexts:
       push: selector-class-identifier-content
     - include: values
 
+  tailwind-at-variants:
+    - match: (@)variants?{{break}}
+      captures:
+        0: keyword.control.directive.css.tailwind
+        1: punctuation.definition.keyword.css.tailwind
+      push:
+        - tailwind-at-variants-meta
+        - maybe-stylesheet-block
+        - tailwind-at-variants-name
+
+  tailwind-at-variants-meta:
+    - meta_include_prototype: false
+    - meta_scope: meta.at-rule.variant.css.tailwind
+    - include: immediately-pop
+
+  tailwind-at-variants-name:
+    - meta_include_prototype: false
+    - match: '{{ident_begin}}'
+      set: tailwind-at-variant-content
+    - include: comments
+    - include: else-pop
+
+  tailwind-at-variant-content:
+    - meta_scope: entity.other.variant-name.css.tailwind
+    - include: identifier-content
+
 ###[ TAILWIND TOPLEVEL AT RULES ]##############################################
 
   # @config "./tailwind.config.js"
@@ -307,30 +333,4 @@ contexts:
 
   tailwind-at-utility-name-content:
     - meta_scope: entity.other.utility-name.css.tailwind
-    - include: identifier-content
-
-  tailwind-at-variants:
-    - match: (@)variants{{break}}
-      captures:
-        0: keyword.control.directive.css.tailwind
-        1: punctuation.definition.keyword.css.tailwind
-      push:
-        - tailwind-at-variants-meta
-        - maybe-stylesheet-block
-        - tailwind-at-variants-name
-
-  tailwind-at-variants-meta:
-    - meta_include_prototype: false
-    - meta_scope: meta.at-rule.variants.css.tailwind
-    - include: immediately-pop
-
-  tailwind-at-variants-name:
-    - meta_include_prototype: false
-    - match: '{{ident_begin}}'
-      set: tailwind-at-variant-content
-    - include: comments
-    - include: else-pop
-
-  tailwind-at-variant-content:
-    - meta_scope: entity.other.variant-name.css.tailwind
     - include: identifier-content
