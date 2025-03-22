@@ -113,6 +113,15 @@ contexts:
 
 ###[ CSS PROPERTY LISTS ]######################################################
 
+  maybe-property-list:
+    # required until ST4174 (PR #3831)
+    - meta_include_prototype: false
+    - match: '{{block_start}}'
+      scope: punctuation.section.block.begin.css
+      set: property-list-body
+    - include: comments
+    - include: else-pop
+
   property-list-body:
     # relaxed properties vs. selectors
     - meta_scope: meta.property-list.css meta.block.css
