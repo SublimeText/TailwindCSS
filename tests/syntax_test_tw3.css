@@ -1,0 +1,137 @@
+/* SYNTAX TEST "Packages/Tailwind CSS/Tailwind CSS.sublime-syntax" */
+
+@import "./custom-base-styles.css";
+/* <- meta.at-rule.import.css keyword.control.directive.css punctuation.definition.keyword.css */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
+/*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+
+@import "tailwindcss" source("../src");
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
+/*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^ meta.string.css string.quoted.double.css */
+/*      ^ punctuation.definition.string.begin.css */
+/*                  ^ punctuation.definition.string.end.css */
+/*                    ^^^^^^ meta.function-call.identifier.css support.function.source.css.tailwind */
+/*                          ^^^^^^^^^^ meta.function-call.arguments.css meta.group.css */
+/*                          ^ punctuation.section.group.begin.css */
+/*                           ^ meta.string.css string.quoted.double.css punctuation.definition.string.begin.css */
+/*                            ^^^^^^ meta.path.url.css meta.string.css string.quoted.double.css */
+/*                              ^ punctuation.separator.path.css */
+/*                                  ^ meta.string.css string.quoted.double.css punctuation.definition.string.end.css */
+/*                                   ^ punctuation.section.group.end.css */
+/*                                    ^ punctuation.terminator.rule.css */
+
+.content {
+    @apply whatever;
+/*  ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind */
+/*                 ^ meta.property-list.css meta.block.css punctuation.terminator.rule.css */
+/*  ^^^^^^ keyword.control.directive.apply.css.tailwind */
+/*         ^^^^^^^^ entity.other.attribute-name.class.css */
+    font-family: Helvetica;
+/*  ^^^^^^^^^^^ meta.property-list.css meta.block.css meta.property-name.css support.type.property-name.css */
+}
+
+@config "./tailwind.config.js";
+/* <- meta.at-rule.config.css.tailwind keyword.control.directive.css punctuation.definition.keyword.css */
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.config.css.tailwind */
+/*^^^^^ keyword.control.directive.css */
+/*      ^^^^^^^^^^^^^^^^^^^^^^ string.quoted.double.css */
+
+@layer base {
+/* <- meta.at-rule.layer.css keyword.control.directive.css punctuation.definition.keyword.css */
+/*^^^^^^^^^^ meta.at-rule.layer.css - meta.block */
+/*          ^^ meta.at-rule.layer.css meta.block.css */
+/*^^^^ keyword.control.directive.css */
+/*     ^^^^ entity.other.layer.css */
+/*          ^ punctuation.section.block.begin.css */
+    .bg {
+        @apply font-bold py-2 px-4 rounded !important;
+/*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+    }
+/*  ^ punctuation.section.block.end.css */
+}
+
+@responsive {
+/* <- meta.at-rule.responsive.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^ meta.at-rule.responsive.css.tailwind - meta.block */
+/*          ^^ meta.at-rule.responsive.css.tailwind meta.block.css */
+/*^^^^^^^^^ keyword.control.directive.css.tailwind */
+/*          ^ punctuation.section.block.begin.css */
+    .bg {
+/*  ^^^ meta.at-rule.responsive.css.tailwind meta.block.css meta.selector.css */
+        @apply font-bold py-2 px-4 rounded !important;
+/*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+    }
+/*  ^ punctuation.section.block.end.css */
+}
+/* <- meta.at-rule.responsive.css.tailwind meta.block.css punctuation.section.block.end.css */
+
+@screen base {
+/* <- meta.at-rule.screen.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^ meta.at-rule.screen.css.tailwind - meta.block */
+/*           ^^ meta.at-rule.screen.css.tailwind meta.block.css */
+/*^^^^^ keyword.control.directive.css.tailwind */
+/*      ^^^^ entity.other.screen-name.css.tailwind */
+/*           ^ punctuation.section.block.begin.css */
+    .bg {
+        @apply font-bold py-2 px-4 rounded !important;
+/*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+
+        {
+/*      ^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.begin.css */
+            @apply
+/*          ^^^^^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+        }
+/*      ^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css punctuation.section.block.end.css */
+
+        & tr:hover {
+/*      ^^^^^^^^^^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.selector.css */
+/*                 ^^ meta.at-rule.screen.css.tailwind meta.block.css meta.property-list.css meta.block.css meta.property-list.css meta.block.css */
+
+            @apply font-bold py-2 px-4 rounded !important;
+/*          ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+        }
+/*      ^ punctuation.section.block.end.css */
+    }
+/*  ^ punctuation.section.block.end.css */
+}
+
+@tailwind base;
+/* <- meta.at-rule.tailwind.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^^ meta.at-rule.tailwind.css.tailwind */
+/*^^^^^^^ keyword.control.directive.css.tailwind */
+/*        ^^^^ entity.other.import.css.tailwind */
+/*            ^ punctuation.terminator.rule.css */
+@tailwind compontent;
+/* <- meta.at-rule.tailwind.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^^^^^^^^ meta.at-rule.tailwind.css.tailwind */
+/*^^^^^^^ keyword.control.directive.css.tailwind */
+/*        ^^^^^^^^^^ entity.other.import.css.tailwind */
+/*                  ^ punctuation.terminator.rule.css */
+@tailwind utilities;
+/* <- meta.at-rule.tailwind.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^^^^^^^ meta.at-rule.tailwind.css.tailwind */
+/*^^^^^^^ keyword.control.directive.css.tailwind */
+/*        ^^^^^^^^^ entity.other.import.css.tailwind */
+/*                 ^ punctuation.terminator.rule.css */
+
+@variants variant {
+/* <- meta.at-rule.variant.css.tailwind keyword.control.directive.css.tailwind punctuation.definition.keyword.css.tailwind */
+/*^^^^^^^^^^^^^^^^ meta.at-rule.variant.css.tailwind - meta.block */
+/*                ^^ meta.at-rule.variant.css.tailwind meta.block.css */
+/*^^^^^^^ keyword.control.directive.css.tailwind */
+/*        ^^^^^^^ entity.other.variant-name.css.tailwind */
+/*                ^ punctuation.section.block.begin.css */
+    .bg {
+        @apply font-bold py-2 px-4 .rounded --custom !important;
+/*      ^^^^^^ meta.at-rule.apply.css.tailwind keyword.control.directive.apply.css.tailwind */
+/*             ^^^^^^^^^ entity.other.attribute-name.class.css */
+/*                       ^^^^ entity.other.attribute-name.class.css */
+/*                            ^^^^ entity.other.attribute-name.class.css */
+/*                                 ^^^^^^^^ entity.other.attribute-name.class.css */
+/*                                          ^^^^^^^^ variable.other.custom-property.css */
+/*                                                   ^^^^^^^^^^ keyword.other.important.css */
+    }
+/*  ^ punctuation.section.block.end.css */
+}
