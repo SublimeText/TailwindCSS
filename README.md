@@ -111,9 +111,9 @@ To add highlighting for Tailwind @-rules to SCSS in a way they are also supporte
 
 > [!WARNING]
 >
-> By assigning `source.scss` main scope original PostCSS syntax is augmented.
+> By assigning `source.scss` main scope original SCSS syntax is augmented.
 > 
-> 1. Augmenting syntax must be loaded after PostCSS in order for this trick to work.
+> 1. Augmenting syntax must be loaded after SCSS in order for this trick to work.
 > 2. Only a single augmenting syntax may exist.
 
 > [!NOTE]
