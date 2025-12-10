@@ -16,6 +16,11 @@ contexts:
   at-import-body:
     - meta_prepend: true
     - include: quoted-urls
+    - match: (?i:prefix)(?=\()
+      scope: meta.function-call.identifier.css support.function.prefix.css.tailwind
+      push:
+        - other-function-arguments-list-body
+        - function-arguments-list-begin
     - match: (?i:source)(?=\()
       scope: meta.function-call.identifier.css support.function.source.css.tailwind
       push:

@@ -22,6 +22,19 @@
 /*                                   ^ punctuation.section.group.end.css */
 /*                                    ^ punctuation.terminator.rule.css */
 
+@import "tailwindcss" prefix(tw);
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.at-rule.import.css */
+/*^^^^^ keyword.control.directive.css */
+/*      ^ meta.string.css string.quoted.double.css punctuation.definition.string.begin.css */
+/*       ^^^^^^^^^^^ meta.path.url.css meta.string.css string.quoted.double.css */
+/*                  ^ meta.string.css string.quoted.double.css punctuation.definition.string.end.css */
+/*                    ^^^^^^ meta.function-call.identifier.css support.function.prefix.css.tailwind */
+/*                          ^^^^ meta.function-call.arguments.css meta.group.css */
+/*                          ^ punctuation.section.group.begin.css */
+/*                           ^^ support.constant.property-value.css */
+/*                             ^ punctuation.section.group.end.css */
+/*                              ^ punctuation.terminator.rule.css */
+
 .content {
     @apply whatever;
 /*  ^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css meta.at-rule.apply.css.tailwind */
